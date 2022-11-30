@@ -1,5 +1,7 @@
 # mmproc
 
+**Contributing Author**: [Adnan Armouti](https://github.com/adnan-armouti).
+
 This library processes raw multimodal (image, rf, audio) data into an ML-ready format.
 
 All code currently under development; please see disclaimer at the end of this README. The "main" branch has been tested on two datasets, while the "low_light" branch is optimized for a single low light self-collected dataset hierarchy.
