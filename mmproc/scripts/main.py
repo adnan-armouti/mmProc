@@ -61,10 +61,10 @@ edit_dict = None
 
 
 if __name__ == '__main__':
-    with open(r"C:\Users\111\Desktop\repos\mmproc\mmproc\config\config.yml", "r") as ymlfile:
+    with open(r"C:\Users\Adnan\Documents\Github\mmproc\mmproc\config\config.yml", "r") as ymlfile:
         config = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
-    proc_dataset_methods = ["spo2_rename"]
+    proc_dataset_methods = ["offload_data"]
     
     start_time = time.time()
 

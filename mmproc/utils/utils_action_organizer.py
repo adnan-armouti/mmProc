@@ -141,7 +141,7 @@ class ActionManager():
         return True
 
     def perform_actions(self) -> bool:
-        if ("visual_data" in [self.data_type]):
+        if (self.data_type == "visual_data"):
             visual_data = VisualData(self.read_dirpath, self.write_dirpath, self.read_files, self.write_files, self.init_config["format"], self.init_config["shape"], self.init_config["bit_depth"], self.init_config["modality"], self.init_config["fps"])
             # loop through actions
             for action in (self.action_config.keys()):
@@ -202,7 +202,7 @@ class ActionManager():
                         self.check_status()
             del visual_data
 
-        elif ("vitals_data" in [self.data_type]):
+        elif (self.data_type == "vitals_data"):
             vitals_data = VitalsData(self.read_dirpath, self.write_dirpath, self.read_files, self.write_files, self.init_config["format"], self.init_config["sensor_type"], self.init_config["offsets"], self.init_config["vitals"])
             # loop through actions
             for action in (self.action_config.keys()):
@@ -239,7 +239,7 @@ class ActionManager():
                         self.check_status()
             del vitals_data
         
-        # elif ("signal_data" in [self.data_type]):
+        # elif (self.data_type == "signal_data"):
         #     signal_data = SignalData()
         #     # loop through actions
         #     for action in (self.action_config.keys()):
@@ -273,7 +273,7 @@ class ActionManager():
         #                 self.check_status()
         #     del signal_data
 
-        # elif ("audio_data" in [self.data_type]):
+        # elif (self.data_type == "audio_data"):
         #     audio_data = AudioData()
         #     # loop through actions
         #     for action in (self.action_config.keys()):
@@ -314,7 +314,7 @@ class ActionManager():
         #                 self.check_status()
         #     del audio_data
 
-        elif ("rf_data" in [self.data_type]):
+        elif (self.data_type == "rf_data"):
             rf_data = RFData(self.read_dirpath, self.write_dirpath, self.read_files, self.write_files, self.init_config["bit_depth"], self.init_config["modality"], self.init_config["fps"], self.init_config["params"], self.init_config["velocity_params"], self.init_config["angle_granularity"])
             # loop through actions
             for action in (self.action_config.keys()):
@@ -350,7 +350,7 @@ class ActionManager():
                         self.check_status()
             del rf_data
 
-        # elif ("meta_data" in [self.data_type]):
+        # elif (self.data_type == "meta_data"):
         #     meta_data = MetaData()
         #     # loop through actions
         #     for action in (self.action_config.keys()):
@@ -391,7 +391,7 @@ class ActionManager():
         #                 self.check_status()
         #     del meta_data
 
-        elif ("file" in [self.data_type]):
+        elif (self.data_type == "file"):
             for action in (self.action_config.keys()):
                 if (action == "copy"):
                     self.status = self.copy_file()

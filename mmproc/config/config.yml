@@ -1,102 +1,32 @@
 # crop copy
 
-# spo2_test:
-#     nir:
-#         folder_manager:
-#             read_dataset_path: "D:\\spo2_verify\\3_1\\RGB_Polarized_Cam"
-#             write_dataset_path: "D:\\spo2_verify_processed\\3_1\\RGB_Polarized_Cam"
-#             read_to_write: one_to_one
-#         file_manager:
-#             visual_data:
-#                 read:
-#                     format: "single_img"
-#                     shape: !!python/tuple [1, 2048, 2448, 3]
-#                     bit_depth: "uint8"
-#                     modality: "nir"
-#                     fps: 30
-#                     # filename: "NIR_CAMERA1_" # only required if format == multiple_imgs
-#                     filename: "RGB_Polarized_Cam__" # only required if format == multiple_imgs
-#                     ext: ".bmp"
-#                 crop:
-#                     crop_coords: !!python/tuple [1300, 1300, 500, 500]
-#                     buffer: !!python/tuple [0, 0]
-#                 write:
-#                     format: "single_img"
-#                     fps: 30
-#                     ext: ".bmp"
-#                     filename: "img_" # only required if format == multiple_imgs
-#                     start_idx: 0 # if format = "multiple_imgs"
-spo2_rename:
-    nir2:
-        folder_manager:
-            read_dataset_path: "D:\\spo2_verify_processed\\6_1\\NIR_CAMERA2"
-            write_dataset_path: "D:\\spo2_verify_processed\\6_1\\NIR_CAMERA2"
-            read_to_write: one_to_one
-        file_manager:
-            visual_data:
-                read:
-                    format: "single_img"
-                    shape: !!python/tuple [1, 480, 640, 1]
-                    bit_depth: "uint8"
-                    modality: "nir"
-                    fps: 30
-                    # filename: "NIR_CAMERA1_" # only required if format == multiple_imgs
-                    filename: "NIR_CAMERA2_" # only required if format == multiple_imgs
-                    ext: ".bmp"
-                write:
-                    format: "single_img"
-                    fps: 30
-                    ext: ".bmp"
-                    filename: "img_" # only required if format == multiple_imgs
-                    start_idx: 0 # if format = "multiple_imgs"
-                delete:
-                    format: "single_img"
-    # nir2:
-    #     folder_manager:
-    #         read_dataset_path: "D:\\spo2_verify\\3_2\\NIR_CAMERA2"
-    #         write_dataset_path: "D:\\spo2_verify_processed\\3_2\\NIR_CAMERA2"
-    #         read_to_write: one_to_one
-    #     file_manager:
-    #         visual_data:
-    #             read:
-    #                 format: "single_img"
-    #                 shape: !!python/tuple [1, 2048, 2048, 1]
-    #                 bit_depth: "uint8"
-    #                 modality: "nir"
-    #                 fps: 30
-    #                 filename: "NIR_CAMERA2_" # only required if format == multiple_imgs
-    #                 ext: ".bmp"
-    #             crop:
-    #                 crop_coords: !!python/tuple [1050, 1250, 400, 400]
-    #                 buffer: !!python/tuple [0, 0]
-    #             write:
-    #                 format: "single_img"
-    #                 fps: 30
-    #                 ext: ".bmp"
-    #                 filename: "img_" # only required if format == multiple_imgs
-    #                 start_idx: 0 # if format = "multiple_imgs"
-    # rgb:
-    #     folder_manager:
-    #         read_dataset_path: "D:\\spo2_verify_processed"
-    #         write_dataset_path: "D:\\spo2_verify_vid"
-    #         read_to_write: one_to_one
-    #     file_manager:
-    #         visual_data:
-    #             read:
-    #                 format: "multiple_imgs"
-    #                 shape: !!python/tuple [1800, 275, 250, 1]
-    #                 bit_depth: "uint8"
-    #                 modality: "nir"
-    #                 fps: 30
-    #                 filename: "img_" # only required if format == multiple_imgs
-    #                 ext: ".bmp"
-    #             write:
-    #                 format: "vid"
-    #                 fps: 30
-    #                 ext: ".avi"
-    #                 filename: "img_" # only required if format == multiple_imgs
-    #                 start_idx: 0 # if format = "single_img"
-
+# OSA_NIR_940_crop_resize:
+#     folder_manager:
+#         read_dataset_path: "E:\\patient_5\\NIR_Camera"
+#         write_dataset_path: "E:\\p5_cropped\\NIR_Camera"
+#         read_to_write: one_to_one
+#     file_manager:
+#         visual_data:
+#             read:
+#                 format: "single_img"
+#                 shape: !!python/tuple [1, 1024, 1024, 1]
+#                 bit_depth: "uint8"
+#                 modality: "nir"
+#                 fps: 30
+#                 ext: ".bmp"
+#             crop:
+#                 crop_coords: !!python/tuple [388, 295, 468, 468]
+#                 buffer: !!python/tuple [0, 0]
+#             resize_spatial:
+#                 resize_dims: !!python/tuple [256, 256]
+#             write:
+#                 format: "single_img"
+#                 fps: 30
+#                 ext: ".bmp"
+#                 # filename: "NIR_Camera_" # only required if format == multiple_imgs
+#                 # start_idx: 0 # if format = "single_img"
+#             # delete:
+            #     format: "single_img"
 
 # OSA_NIR_mm_850_crop_resize:
 #     folder_manager:
@@ -226,23 +156,6 @@ spo2_rename:
 
 # original copy
 
-Copy_ref_timestamps:
-    Copy_ref_timestamps:
-        folder_manager:
-            read_dataset_path: "D:\\spo2_verify"
-            write_dataset_path: "I:\\ts"
-            read_to_write: one_to_one
-        file_manager:
-            file:
-                read:
-                    format: single
-                    ext: ".txt"
-                write: 
-                    format: single
-                copy: 
-                    format: single
-                    ext: ".txt"
-
 offload_data:
     FPGA_Reset_Arduino_init:
         folder_manager:
@@ -293,7 +206,6 @@ offload_data:
                     start_idx: 0 # if format = "single_img"
                 delete:
                     format: "multiple_imgs"
-
     NIR_Camera_mm_850_trial_0:
         folder_manager:
             read_dataset_path: "D:\\patient_25\\trial_0\\NIR_Camera_mm"

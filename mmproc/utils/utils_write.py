@@ -72,9 +72,9 @@ def write_vid(write_dirpath: str, files: list, data: np.ndarray, modality: str, 
     if ext in [".h5"]:
         write_h5(file_path, data, modality)
     elif ext in [".tiff"]: 
-        imageio.mimwrite(file_path, data, bigtiff = True, **kargs)
+        imageio.mimwrite(file_path, data, bigtiff = True)
     else:
-        imageio.mimwrite(file_path, data, **kargs)
+        imageio.mimwrite(file_path, data)
     # return action status
     return True  
 

@@ -98,6 +98,7 @@ def read_vid_from_imgs(read_dirpath: str, files: list, shape: tuple, bit_depth: 
     if (shape[0] != len(files)):
         raise Exception("Expected number of frames = ", shape[0], ", receieved number of images = ", len(files))
     # ensure files are sorted correctly, in increasing numerical order
+    files.sort()
     files = sorted(files, key = len)
     # read data
     data = []

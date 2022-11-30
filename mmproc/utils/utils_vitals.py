@@ -211,7 +211,7 @@ def read_nihon_kohden_vitals(read_dirpath: str, read_files: list) -> dict:
     #     "LOC",
     #     "ROC",
     #     "EKG",
-    #     "SpO2",
+    #     "SaO2",
     #     "PTAF",
     #     "O2-M1",
     #     "C2-M1",
@@ -220,13 +220,14 @@ def read_nihon_kohden_vitals(read_dirpath: str, read_files: list) -> dict:
     #     "CHIN",
     #     "L LEG",
     #     "R LEG",
-    #     "IMAGING"]
+    #     "ImagingResearch",
+    #     "PLETH"]
     # nk_vitals_fps = {"CHEST": 0,
     #     "ABD": 0,
     #     "LOC": 0,
     #     "ROC": 0,
     #     "EKG": 0,
-    #     "SpO2": 0,
+    #     "SaO2": 0,
     #     "PTAF": 0,
     #     "O2-M1": 0,
     #     "C2-M1": 0,
@@ -235,7 +236,8 @@ def read_nihon_kohden_vitals(read_dirpath: str, read_files: list) -> dict:
     #     "CHIN": 0,
     #     "L LEG": 0,
     #     "R LEG": 0,
-    #     "IMAGING": 0}
+    #     "ImagingResearch": 0,
+    #     "PLETH": 0}
     # # check only one file
     # if(len(read_files) != 1):
     #     raise Exception("Expected len of files var = 1, received len = ", len(read_files))
