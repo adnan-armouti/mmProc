@@ -86,7 +86,7 @@ Read, Write, Display, Range Resolution, Velocity Resolution, Angle Resolution.
 **(3) Signal Data**
 Read, Write, Display, Interpolate, Crop.
 
-**(3) File Data**
+**(4) File Data**
 Copy, Delete, Rename, Interpolate, Crop.
 
 <hr /> 
