@@ -36,13 +36,13 @@ From a command line, run the following commands to update and install dependenci
 The full list of pip packages can be found in the pip section of the requirements.yaml file, in the configs folder. If you installed python via Anaconda, simply run this command to create an entirely new python environment: 
 
 ```
->> conda env create -f requirements.yml
+>> conda env create -f requirements.yaml
 ```
 
 Optionally, you may also update a pre-existing python==3.8 environment via this command: 
 
 ```
->> conda env update -f requirements.yml
+>> conda env update -f requirements.yaml
 ```
 
 <hr /> 
