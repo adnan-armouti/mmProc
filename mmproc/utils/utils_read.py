@@ -137,7 +137,7 @@ def read_json(file_path: str) -> dict:
 
 ############################################### read unidimensional_signal_data functions
 
-def read_npy(file_path: str, allow_pickle=False) -> dict:
+def read_npy(file_path: str, allow_pickle=True) -> dict:
     data = np.load(file_path, allow_pickle=allow_pickle)
     return data
 

@@ -180,7 +180,12 @@ def read_philips_vitals(read_dirpath: str, read_files: list, read_vitals: list, 
             original_vital_dict = read_vital_dict_from_npy(read_dirpath, read_files)
         elif(any(".pkl" in f for f in read_files)):
             original_vital_dict = read_vital_dict_from_pkl(read_dirpath, read_files)
-    
+
+    try:
+        original_vital_dict = original_vital_dict.item()
+    except:
+        pass
+
     # to account for MMFair dataset format
     if "rgbd" in original_vital_dict.keys(): 
         original_vital_dict = original_vital_dict["rgbd"]
@@ -189,20 +194,24 @@ def read_philips_vitals(read_dirpath: str, read_files: list, read_vitals: list, 
     vitals = {}
     # create dict of signal_data objects for each vital in original_vitals
     for vital in original_vital_dict.keys():
-        if (read_vitals) and (vital not in read_vitals):
-            continue
-        vitals[vital] = SignalData()
-        # set sensor_stamps, pc_stamps, data, unroll_flag for signal
-        vitals[vital].sensor_stamps, vitals[vital].pc_stamps, vitals[vital].data, vitals[vital].unroll_flag, vitals[vital].fps_data = original_vital_dict[vital]
-        vitals[vital].sensor_stamps = np.asarray(vitals[vital].sensor_stamps)
-        vitals[vital].pc_stamps = np.asarray(vitals[vital].pc_stamps)
-        vitals[vital].data = np.asarray(vitals[vital].data)
-        vitals[vital].unroll_flag = np.asarray([vitals[vital].unroll_flag])
-        # set offset attribute for signal
-        if vital in offsets.keys():
-            vitals[vital].offset = offsets[vital]
+        if (format == "raw"):
+            if (read_vitals) and (vital not in read_vitals):
+                continue
+            vitals[vital] = SignalData()
+            # set sensor_stamps, pc_stamps, data, unroll_flag for signal
+            vitals[vital].sensor_stamps, vitals[vital].pc_stamps, vitals[vital].data, vitals[vital].unroll_flag, vitals[vital].fps_data = original_vital_dict[vital]
+            vitals[vital].sensor_stamps = np.asarray(vitals[vital].sensor_stamps)
+            vitals[vital].pc_stamps = np.asarray(vitals[vital].pc_stamps)
+            vitals[vital].data = np.asarray(vitals[vital].data)
+            vitals[vital].unroll_flag = np.asarray([vitals[vital].unroll_flag])
+            # set offset attribute for signal
+            if vital in offsets.keys():
+                vitals[vital].offset = offsets[vital]
+            else:
+                vitals[vital].offset = 25/30
         else:
-            vitals[vital].offset = 25/30
+            vitals[vital] = SignalData()
+            vitals[vital].data = np.asarray(vitals[vital].data)
     return vitals
 
 def read_nihon_kohden_vitals(read_dirpath: str, read_files: list) -> dict:

@@ -117,12 +117,14 @@ class FileManager():
 
     # define read_visual_files here if required, must update self.read_files_dict
     def read_visual_files_to_file(self) -> None:
-        # keep files with .bmp only
-        read_files = [f for f in self.files if self.read_ext in f]
+        read_files = self.files
+        
+        if (self.read_ext is not None):
+            read_files = [f for f in read_files if self.read_ext in f]
+
         if self.read_filename is not None :
             read_files = [f for f in read_files if self.read_filename in f]
-        if not read_files:
-            self.status = False
+        
         # sort read_files
         read_files.sort()
         read_files = sorted(read_files, key = len)
@@ -141,8 +143,20 @@ class FileManager():
 
     # define write_visual_files here if required, must update self.write_files_dict
     def write_visual_files_to_file(self) -> None:
-        # keep files with .bmp only
-        read_files = [f for f in self.files if self.read_ext in f]
+        read_files = self.files
+
+        # keep files with .tiff only
+        if (self.write_start_idx is not None):
+            pass
+        else:
+            self.write_start_idx = 0
+        
+        if (self.read_ext is not None):
+            read_files = [f for f in read_files if self.read_ext in f]
+
+        if self.read_filename is not None :
+            read_files = [f for f in read_files if self.read_filename in f]
+
         # sort read_files
         read_files.sort()
         read_files = sorted(read_files, key = len)
@@ -167,10 +181,14 @@ class FileManager():
     # define read_visual_files here if required, must update self.read_files_dict
     def read_visual_file_to_files(self) -> None:
         # keep files with .tiff only
+        read_files = self.files
+        
         if (self.read_ext is not None):
-            read_files = [f for f in self.files if self.read_ext in f]
-        else:
-            read_files = [f for f in self.files]
+            read_files = [f for f in read_files if self.read_ext in f]
+
+        if self.read_filename is not None :
+            read_files = [f for f in read_files if self.read_filename in f]
+
         # sort read_files
         read_files.sort()
         read_files = sorted(read_files, key = len)
@@ -184,11 +202,20 @@ class FileManager():
 
     # define write_visual_files here if required, must update self.write_files_dict
     def write_visual_file_to_files(self) -> None:
+        read_files = self.files
+
         # keep files with .tiff only
-        if (self.read_ext is not None):
-            read_files = [f for f in self.files if self.read_ext in f]
+        if (self.write_start_idx is not None):
+            pass
         else:
-            read_files = [f for f in self.files]
+            self.write_start_idx = 0
+        
+        if (self.read_ext is not None):
+            read_files = [f for f in read_files if self.read_ext in f]
+
+        if self.read_filename is not None :
+            read_files = [f for f in read_files if self.read_filename in f]
+
         # sort read_files
         read_files.sort()
         read_files = sorted(read_files, key = len)
@@ -205,19 +232,20 @@ class FileManager():
             write_vid_files = write_files[ (i*self.num_frames_per_vid): (i*self.num_frames_per_vid) + self.num_frames_per_vid ]
             self.write_files_dict[i] = write_vid_files
 
+
     ########################################### e.g. convert visual_data format: single_img to single_img
     # define read_visual_folders here if required
 
     # define read_visual_files here if required, must update self.read_files_dict
     def read_visual_file_to_file(self) -> None:
         # keep files with .bmp only
+        read_files = self.files
+        
         if (self.read_ext is not None):
-            read_files = [f for f in self.files if self.read_ext in f]
-        else:
-            read_files = [f for f in self.files]
+            read_files = [f for f in read_files if self.read_ext in f]
 
-        if (self.read_filename is not None):
-            read_files = [f for f in self.files if self.read_filename in f]
+        if self.read_filename is not None :
+            read_files = [f for f in read_files if self.read_filename in f]
         # sort read_files
         read_files.sort()
         read_files = sorted(read_files, key = len)
@@ -230,6 +258,7 @@ class FileManager():
 
     # define write_visual_files here if required, must update self.write_files_dict
     def write_visual_file_to_file(self) -> None:
+        # print("self.write_ext: ", self.write_ext)
         if (self.write_start_idx is not None):
             read_files = self.files
             # keep files with .bmp only
@@ -363,16 +392,22 @@ class FileManager():
                 self.read_visual_file_to_file()
                 self.write_visual_file_to_file()
             elif (self.read_format in ["vid"]) and (self.write_format in ["multiple_imgs"]):
-                self.write_filename = self.config[data_type]["write"]["filename"]
-                self.write_start_idx =  self.config[data_type]["write"]["start_idx"]
+                if ("start_idx" in (self.config[data_type]["write"].keys())):
+                    self.write_start_idx =  self.config[data_type]["write"]["start_idx"]
+                if ("filename" in (self.config[data_type]["write"].keys())):
+                    self.write_filename =  self.config[data_type]["write"]["filename"]
+                if ("filename" in (self.config[data_type]["read"].keys())):
+                    self.read_filename =  self.config[data_type]["read"]["filename"]
                 self.num_frames_per_vid = self.config[data_type]["read"]["shape"][0]
                 self.read_visual_file_to_files()
                 self.write_visual_file_to_files()
             elif (self.read_format in ["multiple_imgs"]) and (self.write_format in ["vid"]):
+                if ("start_idx" in (self.config[data_type]["write"].keys())):
+                    self.write_start_idx =  self.config[data_type]["write"]["start_idx"]
+                if ("filename" in (self.config[data_type]["write"].keys())):
+                    self.write_filename =  self.config[data_type]["write"]["filename"]
                 if ("filename" in (self.config[data_type]["read"].keys())):
-                    self.read_filename = self.config[data_type]["read"]["filename"]
-                self.write_filename = self.config[data_type]["write"]["filename"]
-                self.write_start_idx =  self.config[data_type]["write"]["start_idx"]
+                    self.read_filename =  self.config[data_type]["read"]["filename"]
                 self.num_frames_per_vid = self.config[data_type]["read"]["shape"][0]
                 self.read_visual_files_to_file()
                 self.write_visual_files_to_file()
@@ -393,6 +428,7 @@ class FileManager():
         elif (data_type == "vitals_data"):
             self.read_format = self.config[data_type]["read"]["format"]
             self.read_ext = self.config[data_type]["read"]["ext"]
+            self.read_filename = self.config[data_type]["read"]["filename"]
             
             if "interpolate" in self.config[data_type].keys():
                 if "filename" in self.config[data_type]["interpolate"].keys() and "ext" in self.config[data_type]["interpolate"].keys():
