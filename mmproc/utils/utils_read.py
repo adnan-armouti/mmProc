@@ -76,7 +76,7 @@ def read_vid(read_dirpath: str, files: list, shape: tuple, bit_depth: str) -> np
         try:
             data = imageio.volread(file_path) 
         except:
-            data = imageio.mimread(file_path) 
+            data = imageio.mimread(file_path, memtest = False) 
             if(bit_depth == "uint16"):
                 bit_depth = np.uint16
             elif(bit_depth == "uint8"):
