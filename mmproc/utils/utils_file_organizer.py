@@ -316,7 +316,7 @@ class FileManager():
                 write_files = [f.replace(self.read_ext, self.write_ext) for f in write_files]
             else:
                 write_files = write_files
-
+            
             if (self.read_filename is not None) and (self.write_filename is not None):
                 write_files = [f.replace(self.read_filename, self.write_filename) for f in write_files]
             else:
@@ -457,6 +457,10 @@ class FileManager():
             self.read_format = self.config[data_type]["read"]["format"]
             self.write_format = self.config[data_type]["write"]["format"]
             if (all([s == "single" for s in [self.read_format, self.write_format] ])):
+                if ("filename" in (self.config[data_type]["write"].keys())):
+                    self.write_filename =  self.config[data_type]["write"]["filename"]
+                if ("filename" in (self.config[data_type]["read"].keys())):
+                    self.read_filename =  self.config[data_type]["read"]["filename"]
                 if ("start_idx" in (self.config[data_type]["write"].keys())):
                     self.write_start_idx =  self.config[data_type]["write"]["start_idx"]
                 if ("ext" in (self.config[data_type]["read"].keys())):
@@ -467,5 +471,3 @@ class FileManager():
                 self.write_visual_file_to_file()
             else:
                 raise Exception("read_format and write_format do not match!")
-
-                

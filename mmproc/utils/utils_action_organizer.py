@@ -122,6 +122,7 @@ class ActionManager():
         return True
 
     def rename_multiple_files(self) -> bool:
+        self.read_files = self.read_files[0]
         # check more than one file
         if(len(self.read_files) <= 1):
             raise Exception("Expected len of self.read_files var > 1, received len = ", len(self.read_files), ". Please change format accordingly or double check self.read_files var")
@@ -134,6 +135,7 @@ class ActionManager():
             read_file_path = os.path.join(self.read_dirpath, read_file)
             rename_file = self.write_files[idx]
             rename_file_path = os.path.join(self.read_dirpath, rename_file)
+
             if os.path.isfile(read_file_path):
                 # warnings.warn(f"Input File {read_file_path} will now be deleted.")
                 os.rename(read_file_path, rename_file_path)
