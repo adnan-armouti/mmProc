@@ -122,7 +122,6 @@ class ActionManager():
         return True
 
     def rename_multiple_files(self) -> bool:
-        self.read_files = self.read_files[0]
         # check more than one file
         if(len(self.read_files) <= 1):
             raise Exception("Expected len of self.read_files var > 1, received len = ", len(self.read_files), ". Please change format accordingly or double check self.read_files var")
